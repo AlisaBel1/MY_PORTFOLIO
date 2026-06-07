@@ -1,70 +1,93 @@
 import { useEffect, useRef } from 'react';
-import Scene3D from '../components/Scene3D';
 import './Hero.css';
 
 export default function Hero() {
-  const textRef = useRef(null);
+  const headingRef = useRef(null);
+  const subRef = useRef(null);
+  const badgeRef = useRef(null);
 
   useEffect(() => {
-    const el = textRef.current;
-    if (!el) return;
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    setTimeout(() => {
-      el.style.transition = 'opacity 1s ease, transform 1s ease';
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
-    }, 300);
+    const els = [badgeRef.current, headingRef.current, subRef.current];
+    els.forEach((el, i) => {
+      if (!el) return;
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      setTimeout(() => {
+        el.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, 200 + i * 150);
+    });
   }, []);
 
   return (
     <section id="hero" className="hero">
-      {/* 3D canvas */}
-      <div className="hero-canvas">
-        <Scene3D />
+
+      {/* ── Photo — right side, full height bleed ── */}
+      <div className="hero-photo-wrap">
+        <img src="/alisa-hero.png" alt="Alisa Biliavska" className="hero-photo" />
+        {/* gradient blends photo into bg on left edge */}
+        <div className="hero-photo-fade" />
       </div>
 
-      {/* Radial gradient overlay */}
-      <div className="hero-gradient" />
+      {/* ── Neon lines decoration ── */}
+      <div className="hero-neon-lines" aria-hidden>
+        <div className="neon-line neon-h" style={{ top: '22%', left: '0', width: '38%' }} />
+        <div className="neon-line neon-h" style={{ top: '22%', left: '0', width: '22%', opacity: 0.35 }} />
+        <div className="neon-line neon-h" style={{ bottom: '28%', left: '0', width: '45%' }} />
+        <div className="neon-line neon-v" style={{ left: '6%', top: '10%', height: '35%' }} />
+        <div className="neon-dot" style={{ left: '6%', top: '10%' }} />
+        <div className="neon-dot" style={{ left: '6%', top: 'calc(10% + 35%)' }} />
+      </div>
 
-      {/* Content */}
-      <div className="hero-content" ref={textRef}>
-        <div className="hero-badge mono">
+      {/* ── Text content ── */}
+      <div className="hero-content">
+        <div className="hero-badge mono" ref={badgeRef}>
           <span className="hero-badge-dot" />
           available for work · Kaunas, Lithuania
         </div>
 
-        <h1 className="hero-title serif">
-          Alisa<br />
-          <em>Biliavska</em>
+        <h1 className="hero-title" ref={headingRef}>
+          <span className="hero-title-first serif">Alisa</span>
+          <span className="hero-title-last serif">Biliavska</span>
         </h1>
 
-        <p className="hero-sub">
-          Software Engineering Student<br />
-          <span className="hero-sub-accent">Web · Data · Cybersecurity</span>
-        </p>
+        <div className="hero-sub-block" ref={subRef}>
+          <p className="hero-role mono">
+            <span className="hero-role-bracket">[</span>
+            Software Engineer
+            <span className="hero-role-bracket">]</span>
+          </p>
+          <p className="hero-desc">
+            Web Engineering · Data Systems · Cybersecurity<br />
+            Building things that ship.
+          </p>
 
-        <div className="hero-actions">
-          <a href="#projects" className="btn-primary" data-hover>
-            View Work
-          </a>
-          <a href="#contact" className="btn-ghost" data-hover>
-            Get in touch ↗
-          </a>
-        </div>
+          <div className="hero-actions">
+            <a href="#projects" className="btn-primary" data-hover>View Work</a>
+            <a href="#contact" className="btn-ghost" data-hover>Get in touch ↗</a>
+          </div>
 
-        <div className="hero-stack mono">
-          {['React', 'Node.js', 'Three.js', 'Python', 'Java', 'C#'].map(t => (
-            <span key={t} className="hero-tag">{t}</span>
-          ))}
+          <div className="hero-stack mono">
+            {['React', 'Node.js', 'Three.js', 'Python', 'Java', 'Docker'].map(t => (
+              <span key={t} className="hero-tag">{t}</span>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* ── Chapter label like Mina Massoud ── */}
+      <div className="hero-chapter mono">
+        <span>零</span>
+        <span>CHAPTER 00</span>
+      </div>
+
+      {/* ── Scroll indicator ── */}
       <div className="hero-scroll mono">
-        <span>scroll</span>
         <div className="hero-scroll-line" />
+        <span>scroll</span>
       </div>
+
     </section>
   );
 }
