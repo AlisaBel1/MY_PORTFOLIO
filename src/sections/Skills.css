@@ -1,0 +1,114 @@
+.skills {
+  padding: 120px 48px;
+  background: var(--surface);
+  position: relative;
+}
+
+.skills::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 50%, rgba(168,141,255,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.skills-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.skills-heading {
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 48px;
+  color: var(--text);
+}
+
+.skills-heading em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.skill-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.skill-bar-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.skill-bar-meta .mono {
+  color: var(--accent);
+  font-size: 11px;
+}
+
+.skill-bar-track {
+  height: 2px;
+  background: var(--border);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 1px;
+  transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.tech-group {
+  margin-bottom: 36px;
+}
+
+.tech-group-title {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tech-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 2px;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  cursor: default;
+}
+
+.tech-tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(168,141,255,0.06);
+}
+
+@media (max-width: 900px) {
+  .skills-grid { grid-template-columns: 1fr; gap: 48px; }
+  .skills { padding: 80px 24px; }
+}

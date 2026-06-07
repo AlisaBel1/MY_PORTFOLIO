@@ -1,0 +1,126 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(5, 5, 8, 0.85);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-box {
+  background: var(--surface2);
+  border: 1px solid var(--border-glow);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-muted);
+  font-size: 12px;
+  cursor: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, color 0.2s;
+  z-index: 1;
+}
+.modal-close:hover { border-color: var(--accent); color: var(--accent); }
+
+.modal-header {
+  padding: 20px 24px 0;
+}
+
+.modal-tag {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--border-glow);
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+.modal-img-wrap {
+  padding: 20px 24px;
+}
+
+.modal-img {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.modal-placeholder {
+  aspect-ratio: 16/10;
+  background: var(--surface);
+  border: 1px dashed var(--border-glow);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text-muted);
+}
+
+.modal-placeholder-icon { font-size: 40px; }
+
+.modal-placeholder p {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.modal-placeholder-sub {
+  font-size: 11px;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+.modal-footer {
+  padding: 0 24px 24px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+  padding-top: 20px;
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.modal-issuer {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
