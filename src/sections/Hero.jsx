@@ -30,15 +30,7 @@ export default function Hero() {
         <div className="hero-photo-fade" />
       </div>
 
-      {/* ── Neon lines decoration ── */}
-      <div className="hero-neon-lines" aria-hidden>
-        <div className="neon-line neon-h" style={{ top: '22%', left: '0', width: '38%' }} />
-        <div className="neon-line neon-h" style={{ top: '22%', left: '0', width: '22%', opacity: 0.35 }} />
-        <div className="neon-line neon-h" style={{ bottom: '28%', left: '0', width: '45%' }} />
-        <div className="neon-line neon-v" style={{ left: '6%', top: '10%', height: '35%' }} />
-        <div className="neon-dot" style={{ left: '6%', top: '10%' }} />
-        <div className="neon-dot" style={{ left: '6%', top: 'calc(10% + 35%)' }} />
-      </div>
+      
 
       {/* ── Text content ── */}
       <div className="hero-content">
