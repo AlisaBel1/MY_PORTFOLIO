@@ -28,7 +28,7 @@ const experience = [
     role: 'QA IoT Engineer Intern',
     desc: 'Completed internship at the Teltonika laboratory, focusing on hardware-level testing and network diagnostics of industrial IoT devices. Administered Linux environments and configured complex network infrastructures including routing, VLANs and firewalls (OSI/TCP-IP models). Conducted API testing using Postman and validated industrial communication protocols to ensure robust network stability and security.',
     tags: ['Linux', 'TCP/IP', 'VLAN', 'Routing', 'Firewalls', 'Postman', 'Industrial Protocols'],
-    certificate: '/teltonika-certificate.pdf',
+    certificate: '/certs/teltonika-certificate.pdf',
   },
   {
     period: 'Dec 2025',
