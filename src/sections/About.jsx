@@ -57,12 +57,12 @@ export default function About() {
         <div className="about-grid">
           <div className="about-text">
             <h2 className="serif about-heading">
-              Frontend dev who<br />
-              <em>knows the network</em>
+              My<br />
+              <em>Certificates</em>
             </h2>
             <p>
               I build React interfaces, and I understand what runs underneath them.
-              I'm a 3rd-year Informatics Systems student at Vytautas Magnus University
+              I'm a 4th-year Informatics Systems student at Vytautas Magnus University
               who just wrapped up a QA internship at <strong>Teltonika Networks</strong>,
               testing industrial IoT hardware: VLANs, routing, firewalls, Modbus TCP,
               MQTT and SNMP.
@@ -72,14 +72,9 @@ export default function About() {
               prove the fix before I call it done. Wireshark, Postman, a Linux box
               and a test bench beat guessing every time. Add hands-on security work
               (Metasploit, Aircrack-ng, TryHackMe) and a <strong>Mastercard</strong> cybersecurity
-              background, and I build things with attack surface in mind from day one.
+              background and frontend development skills.
             </p>
-            <p>
-              I want to ship fast, secure, scalable products where the frontend is
-              only as good as the infrastructure behind it, backed by internships at{' '}
-              <strong>JP Morgan Chase</strong> and Teltonika.
-            </p>
-
+        
             <div className="about-langs">
               {langs.map(l => (
                 <div key={l.lang} className="lang-item">
@@ -93,7 +88,7 @@ export default function About() {
           <div className="about-certs">
             <h3 className="mono about-certs-title">// certifications — click to view</h3>
             <ul>
-              {certs.map((c, i) => (
+              {certs.map((c) => (
                 <li
                   key={c.label}
                   className="cert-item cert-clickable"
