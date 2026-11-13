@@ -35,7 +35,7 @@
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 80px;
   align-items: start;
 }
@@ -132,6 +132,8 @@
 
 .cert-text {
   flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .cert-view {
@@ -198,6 +200,16 @@
 }
 
 @media (max-width: 900px) {
-  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .about-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
   .about { padding: 80px 24px; }
+  .section-label { margin-bottom: 40px; flex-wrap: wrap; }
+  /* no hover on touch: keep the "view" hint visible */
+  .cert-view { opacity: 1; }
+  .cert-item { align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .about-edu { padding: 20px 20px 20px 24px; }
+  .about-edu-degree { font-size: 18px; overflow-wrap: break-word; }
+  .about-edu-school { overflow-wrap: break-word; }
 }

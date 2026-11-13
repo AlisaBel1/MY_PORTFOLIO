@@ -57,18 +57,27 @@ export default function About() {
         <div className="about-grid">
           <div className="about-text">
             <h2 className="serif about-heading">
-              Software student<br />
-              <em>building real things</em>
+              Frontend dev who<br />
+              <em>knows the network</em>
             </h2>
             <p>
-              I'm a 3rd-year Informatics Systems student at Vytautas Magnus University.
-              My interest sits at the intersection of web engineering, data systems,
-              and cybersecurity — I like tackling problems that actually ship.
+              I build React interfaces, and I understand what runs underneath them.
+              I'm a 3rd-year Informatics Systems student at Vytautas Magnus University
+              who just wrapped up a QA internship at <strong>Teltonika Networks</strong>,
+              testing industrial IoT hardware: VLANs, routing, firewalls, Modbus TCP,
+              MQTT and SNMP.
             </p>
             <p>
-              I've completed internships at <strong>JP Morgan Chase</strong> and earned
-              cybersecurity credentials from <strong>Mastercard</strong>. Whether it's
-              a logistics dashboard or a full-stack app, I push to production.
+              I work empirically. I reproduce the bug, capture the packets, and
+              prove the fix before I call it done. Wireshark, Postman, a Linux box
+              and a test bench beat guessing every time. Add hands-on security work
+              (Metasploit, Aircrack-ng, TryHackMe) and a <strong>Mastercard</strong> cybersecurity
+              background, and I build things with attack surface in mind from day one.
+            </p>
+            <p>
+              I want to ship fast, secure, scalable products where the frontend is
+              only as good as the infrastructure behind it, backed by internships at{' '}
+              <strong>JP Morgan Chase</strong> and Teltonika.
             </p>
 
             <div className="about-langs">

@@ -20,7 +20,7 @@
 
 .skills-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 80px;
   align-items: start;
 }
@@ -73,7 +73,11 @@
 }
 
 .tech-group {
-  margin-bottom: 36px;
+  margin-bottom: 32px;
+}
+
+.tech-group:last-child {
+  margin-bottom: 0;
 }
 
 .tech-group-title {
@@ -100,6 +104,8 @@
   border-radius: 2px;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
   cursor: default;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .tech-tag:hover {
@@ -109,6 +115,7 @@
 }
 
 @media (max-width: 900px) {
-  .skills-grid { grid-template-columns: 1fr; gap: 48px; }
+  .skills-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
   .skills { padding: 80px 24px; }
+  .skills-heading { margin-bottom: 32px; }
 }

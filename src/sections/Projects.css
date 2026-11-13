@@ -161,7 +161,7 @@
 
 .exp-item {
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: 160px minmax(0, 1fr);
   gap: 40px;
   padding: 28px 0;
   border-bottom: 1px solid var(--border);
@@ -199,12 +199,61 @@
   font-size: 14px;
   color: var(--text-muted);
   line-height: 1.7;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+/* "View Certificate" button */
+.exp-cert {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  border: 1px solid var(--border-glow);
+  background: rgba(168,141,255,0.05);
+  padding: 7px 14px;
+  border-radius: 2px;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.exp-cert:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  transform: translateY(-1px);
+}
+
+.exp-cert:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
 }
 
 @media (max-width: 768px) {
   .projects { padding: 80px 24px; }
-  .project-card { grid-template-columns: 1fr; gap: 16px; }
+  .project-card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding: 24px 20px;
+  }
+  .project-card:hover { transform: none; }
+  .project-title { font-size: 22px; overflow-wrap: break-word; }
   .project-num { display: none; }
-  .project-links { flex-direction: row; }
-  .exp-item { grid-template-columns: 1fr; gap: 8px; }
+  .project-links { flex-direction: row; flex-wrap: wrap; }
+  .project-list { margin-bottom: 56px; }
+  .exp-block { padding-top: 48px; }
+  .exp-item { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .exp-header { gap: 8px 16px; }
+  .exp-cert { margin-left: 0; margin-top: 4px; }
 }

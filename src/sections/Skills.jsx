@@ -4,7 +4,7 @@ import './Skills.css';
 const techGroups = [
   {
     title: 'Languages',
-    items: ['Python', 'Java', 'C#', 'JavaScript', 'TypeScript', 'HTML', 'CSS', '.NET'],
+    items: ['Python', 'Java', 'C#', 'JavaScript', 'TypeScript', 'Swift', 'HTML', 'CSS', '.NET'],
   },
   {
     title: 'Frontend & 3D',
@@ -15,8 +15,24 @@ const techGroups = [
     items: ['Node.js', 'Spring Boot', 'REST APIs', 'MongoDB', 'MySQL', 'NoSQL'],
   },
   {
+    title: 'Networking & Infrastructure',
+    items: ['Linux', 'TCP/IP', 'VLAN', 'Routing & Firewalls'],
+  },
+  {
+    title: 'IoT & Industrial Protocols',
+    items: ['MQTT', 'Modbus TCP', 'SNMP'],
+  },
+  {
+    title: 'Testing & Diagnostics',
+    items: ['Postman API Testing', 'Wireshark (Network Traffic Analysis)'],
+  },
+  {
+    title: 'Security & Pentesting',
+    items: ['Ethical Hacking', 'Metasploit', 'Aircrack-ng', 'TryHackMe labs'],
+  },
+  {
     title: 'DevOps & Tools',
-    items: ['Git', 'Docker', 'Kubernetes', 'Linux', 'Figma', 'Jupyter', 'TensorFlow', 'Pandas'],
+    items: ['Git', 'Docker', 'Kubernetes', 'Figma', 'Jupyter', 'TensorFlow', 'Pandas'],
   },
 ];
 

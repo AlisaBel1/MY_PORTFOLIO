@@ -27,6 +27,8 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -35,6 +37,18 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   cursor: none;
+  /* long words / URLs wrap instead of spilling out of their container */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+}
+
+/* grid / flex children may shrink below their content width */
+section > *, .about-grid > *, .skills-grid > *, .contact-grid > * {
+  min-width: 0;
 }
 
 a {

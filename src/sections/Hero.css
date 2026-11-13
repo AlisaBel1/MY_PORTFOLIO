@@ -1,7 +1,7 @@
 .hero {
   position: relative;
-  height: 100vh;
-  min-height: 700px;
+  min-height: max(100vh, 700px);
+  min-height: max(100svh, 700px);
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -162,6 +162,7 @@
 
 .hero-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 12px;
   margin-bottom: 32px;
@@ -288,9 +289,12 @@
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .hero {
+    /* stack content + scroll hint vertically instead of side by side */
+    flex-direction: column;
     align-items: flex-start;
     padding-top: 120px;
     height: auto;
+    min-height: 100vh;
     min-height: 100svh;
     padding-bottom: 60px;
   }
@@ -318,6 +322,19 @@
     padding: 0 24px;
     position: relative;
     z-index: 3;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-badge {
+    flex-wrap: wrap;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .hero-desc,
+  .hero-role {
+    overflow-wrap: break-word;
   }
 
   .hero-title-first {
@@ -328,14 +345,18 @@
     font-size: clamp(40px, 12vw, 64px);
   }
 
-  .hero-scroll { left: 24px; bottom: 24px; }
   .hero-chapter { right: 24px; top: 80px; }
-  
-  /* убрать пустое место снизу */
+
+  /* no empty gap below the content */
   .hero-scroll {
     position: relative;
     bottom: auto;
     left: auto;
-    margin-top: 32px;
+    margin: 32px 0 0 24px;
   }
+}
+
+@media (max-width: 600px) {
+  /* decorative label collides with the badge on narrow screens */
+  .hero-chapter { display: none; }
 }

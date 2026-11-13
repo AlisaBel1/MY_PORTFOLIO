@@ -1,0 +1,452 @@
+diff --git a/src/components/CertModal.css b/src/components/CertModal.css
+index f07ea43..bead01f 100644
+--- a/src/components/CertModal.css
++++ b/src/components/CertModal.css
+@@ -23,7 +23,9 @@
+   width: 100%;
+   max-width: 680px;
+   max-height: 90vh;
++  max-height: 90dvh;
+   overflow-y: auto;
++  overflow-wrap: break-word;
+   position: relative;
+   animation: slideUp 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+ }
+diff --git a/src/sections/About.css b/src/sections/About.css
+index 8a33a6e..e779ed5 100644
+--- a/src/sections/About.css
++++ b/src/sections/About.css
+@@ -35,7 +35,7 @@
+ 
+ .about-grid {
+   display: grid;
+-  grid-template-columns: 1fr 1fr;
++  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+   gap: 80px;
+   align-items: start;
+ }
+@@ -132,6 +132,8 @@
+ 
+ .cert-text {
+   flex: 1;
++  min-width: 0;
++  overflow-wrap: break-word;
+ }
+ 
+ .cert-view {
+@@ -198,6 +200,16 @@
+ }
+ 
+ @media (max-width: 900px) {
+-  .about-grid { grid-template-columns: 1fr; gap: 48px; }
++  .about-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+   .about { padding: 80px 24px; }
++  .section-label { margin-bottom: 40px; flex-wrap: wrap; }
++  /* no hover on touch: keep the "view" hint visible */
++  .cert-view { opacity: 1; }
++  .cert-item { align-items: flex-start; }
++}
++
++@media (max-width: 480px) {
++  .about-edu { padding: 20px 20px 20px 24px; }
++  .about-edu-degree { font-size: 18px; overflow-wrap: break-word; }
++  .about-edu-school { overflow-wrap: break-word; }
+ }
+diff --git a/src/sections/About.jsx b/src/sections/About.jsx
+index 4a62f07..afe781c 100644
+--- a/src/sections/About.jsx
++++ b/src/sections/About.jsx
+@@ -57,18 +57,27 @@ export default function About() {
+         <div className="about-grid">
+           <div className="about-text">
+             <h2 className="serif about-heading">
+-              Software student<br />
+-              <em>building real things</em>
++              Frontend dev who<br />
++              <em>knows the network</em>
+             </h2>
+             <p>
+-              I'm a 3rd-year Informatics Systems student at Vytautas Magnus University.
+-              My interest sits at the intersection of web engineering, data systems,
+-              and cybersecurity — I like tackling problems that actually ship.
++              I build React interfaces, and I understand what runs underneath them.
++              I'm a 3rd-year Informatics Systems student at Vytautas Magnus University
++              who just wrapped up a QA internship at <strong>Teltonika Networks</strong>,
++              testing industrial IoT hardware: VLANs, routing, firewalls, Modbus TCP,
++              MQTT and SNMP.
+             </p>
+             <p>
+-              I've completed internships at <strong>JP Morgan Chase</strong> and earned
+-              cybersecurity credentials from <strong>Mastercard</strong>. Whether it's
+-              a logistics dashboard or a full-stack app, I push to production.
++              I work empirically. I reproduce the bug, capture the packets, and
++              prove the fix before I call it done. Wireshark, Postman, a Linux box
++              and a test bench beat guessing every time. Add hands-on security work
++              (Metasploit, Aircrack-ng, TryHackMe) and a <strong>Mastercard</strong> cybersecurity
++              background, and I build things with attack surface in mind from day one.
++            </p>
++            <p>
++              I want to ship fast, secure, scalable products where the frontend is
++              only as good as the infrastructure behind it, backed by internships at{' '}
++              <strong>JP Morgan Chase</strong> and Teltonika.
+             </p>
+ 
+             <div className="about-langs">
+diff --git a/src/sections/Contact.css b/src/sections/Contact.css
+index 069230b..bd1501f 100644
+--- a/src/sections/Contact.css
++++ b/src/sections/Contact.css
+@@ -35,7 +35,7 @@
+ 
+ .contact-grid {
+   display: grid;
+-  grid-template-columns: 1fr 1fr;
++  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+   gap: 80px;
+   align-items: start;
+   margin-bottom: 80px;
+@@ -143,7 +143,14 @@
+ 
+ @media (max-width: 768px) {
+   .contact { padding: 80px 24px 60px; }
+-  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
++  .contact-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; margin-bottom: 56px; }
+   .contact-footer { flex-direction: column; gap: 8px; }
+-  .contact-link { grid-template-columns: 70px 1fr 20px; }
++  .contact-link { grid-template-columns: 70px minmax(0, 1fr) 20px; align-items: start; }
++  /* show the full email / URL instead of truncating with an ellipsis */
++  .contact-link-value {
++    white-space: normal;
++    overflow: visible;
++    text-overflow: clip;
++    overflow-wrap: anywhere;
++  }
+ }
+diff --git a/src/sections/Hero.css b/src/sections/Hero.css
+index bf009f5..25fdb3a 100644
+--- a/src/sections/Hero.css
++++ b/src/sections/Hero.css
+@@ -1,7 +1,7 @@
+ .hero {
+   position: relative;
+-  height: 100vh;
+-  min-height: 700px;
++  min-height: max(100vh, 700px);
++  min-height: max(100svh, 700px);
+   display: flex;
+   align-items: center;
+   overflow: hidden;
+@@ -162,6 +162,7 @@
+ 
+ .hero-actions {
+   display: flex;
++  flex-wrap: wrap;
+   align-items: center;
+   gap: 12px;
+   margin-bottom: 32px;
+@@ -288,9 +289,12 @@
+ /* ── Responsive ── */
+ @media (max-width: 900px) {
+   .hero {
++    /* stack content + scroll hint vertically instead of side by side */
++    flex-direction: column;
+     align-items: flex-start;
+     padding-top: 120px;
+     height: auto;
++    min-height: 100vh;
+     min-height: 100svh;
+     padding-bottom: 60px;
+   }
+@@ -318,6 +322,19 @@
+     padding: 0 24px;
+     position: relative;
+     z-index: 3;
++    width: 100%;
++    max-width: 100%;
++  }
++
++  .hero-badge {
++    flex-wrap: wrap;
++    line-height: 1.6;
++    margin-bottom: 24px;
++  }
++
++  .hero-desc,
++  .hero-role {
++    overflow-wrap: break-word;
+   }
+ 
+   .hero-title-first {
+@@ -328,14 +345,18 @@
+     font-size: clamp(40px, 12vw, 64px);
+   }
+ 
+-  .hero-scroll { left: 24px; bottom: 24px; }
+   .hero-chapter { right: 24px; top: 80px; }
+-  
+-  /* убрать пустое место снизу */
++
++  /* no empty gap below the content */
+   .hero-scroll {
+     position: relative;
+     bottom: auto;
+     left: auto;
+-    margin-top: 32px;
++    margin: 32px 0 0 24px;
+   }
++}
++
++@media (max-width: 600px) {
++  /* decorative label collides with the badge on narrow screens */
++  .hero-chapter { display: none; }
+ }
+\ No newline at end of file
+diff --git a/src/sections/Projects.css b/src/sections/Projects.css
+index 8730116..4ce7ab1 100644
+--- a/src/sections/Projects.css
++++ b/src/sections/Projects.css
+@@ -161,7 +161,7 @@
+ 
+ .exp-item {
+   display: grid;
+-  grid-template-columns: 120px 1fr;
++  grid-template-columns: 160px minmax(0, 1fr);
+   gap: 40px;
+   padding: 28px 0;
+   border-bottom: 1px solid var(--border);
+@@ -199,12 +199,61 @@
+   font-size: 14px;
+   color: var(--text-muted);
+   line-height: 1.7;
++  overflow-wrap: break-word;
++  word-wrap: break-word;
++}
++
++.exp-tags {
++  display: flex;
++  flex-wrap: wrap;
++  gap: 6px;
++  margin-top: 16px;
++}
++
++/* "View Certificate" button */
++.exp-cert {
++  display: inline-flex;
++  align-items: center;
++  gap: 6px;
++  margin-left: auto;
++  font-family: var(--font-mono);
++  font-size: 11px;
++  letter-spacing: 0.1em;
++  color: var(--accent);
++  border: 1px solid var(--border-glow);
++  background: rgba(168,141,255,0.05);
++  padding: 7px 14px;
++  border-radius: 2px;
++  white-space: nowrap;
++  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
++}
++
++.exp-cert:hover {
++  background: var(--accent);
++  border-color: var(--accent);
++  color: var(--bg);
++  transform: translateY(-1px);
++}
++
++.exp-cert:focus-visible {
++  outline: 2px solid var(--accent2);
++  outline-offset: 2px;
+ }
+ 
+ @media (max-width: 768px) {
+   .projects { padding: 80px 24px; }
+-  .project-card { grid-template-columns: 1fr; gap: 16px; }
++  .project-card {
++    grid-template-columns: minmax(0, 1fr);
++    gap: 16px;
++    padding: 24px 20px;
++  }
++  .project-card:hover { transform: none; }
++  .project-title { font-size: 22px; overflow-wrap: break-word; }
+   .project-num { display: none; }
+-  .project-links { flex-direction: row; }
+-  .exp-item { grid-template-columns: 1fr; gap: 8px; }
++  .project-links { flex-direction: row; flex-wrap: wrap; }
++  .project-list { margin-bottom: 56px; }
++  .exp-block { padding-top: 48px; }
++  .exp-item { grid-template-columns: minmax(0, 1fr); gap: 8px; }
++  .exp-header { gap: 8px 16px; }
++  .exp-cert { margin-left: 0; margin-top: 4px; }
+ }
+diff --git a/src/sections/Projects.jsx b/src/sections/Projects.jsx
+index b0ecaa9..56368e5 100644
+--- a/src/sections/Projects.jsx
++++ b/src/sections/Projects.jsx
+@@ -22,6 +22,14 @@ const projects = [
+ ];
+ 
+ const experience = [
++  {
++    period: 'Aug 2026 — Oct 2026',
++    company: 'Teltonika Networks',
++    role: 'QA IoT Engineer Intern',
++    desc: 'Completed internship at the Teltonika laboratory, focusing on hardware-level testing and network diagnostics of industrial IoT devices. Administered Linux environments and configured complex network infrastructures including routing, VLANs and firewalls (OSI/TCP-IP models). Conducted API testing using Postman and validated industrial communication protocols to ensure robust network stability and security.',
++    tags: ['Linux', 'TCP/IP', 'VLAN', 'Routing', 'Firewalls', 'Postman', 'Industrial Protocols'],
++    certificate: '/teltonika-certificate.pdf',
++  },
+   {
+     period: 'Dec 2025',
+     company: 'JP Morgan Chase & Co',
+@@ -90,7 +98,7 @@ export default function Projects() {
+           <h3 className="mono exp-title">// experience</h3>
+           <div className="exp-list">
+             {experience.map(e => (
+-              <div key={e.company} className="exp-item">
++              <div key={`${e.company}-${e.period}`} className="exp-item">
+                 <div className="exp-left">
+                   <span className="mono exp-period">{e.period}</span>
+                 </div>
+@@ -98,8 +106,26 @@ export default function Projects() {
+                   <div className="exp-header">
+                     <span className="exp-company">{e.company}</span>
+                     <span className="mono exp-role">{e.role}</span>
++                    {e.certificate && (
++                      <a
++                        href={e.certificate}
++                        target="_blank"
++                        rel="noopener noreferrer"
++                        className="exp-cert"
++                        data-hover
++                      >
++                        View Certificate ↗
++                      </a>
++                    )}
+                   </div>
+                   <p className="exp-desc">{e.desc}</p>
++                  {e.tags && (
++                    <div className="exp-tags">
++                      {e.tags.map(t => (
++                        <span key={t} className="project-tag mono">{t}</span>
++                      ))}
++                    </div>
++                  )}
+                 </div>
+               </div>
+             ))}
+diff --git a/src/sections/Skills.css b/src/sections/Skills.css
+index c9946d7..87143de 100644
+--- a/src/sections/Skills.css
++++ b/src/sections/Skills.css
+@@ -20,7 +20,7 @@
+ 
+ .skills-grid {
+   display: grid;
+-  grid-template-columns: 1fr 1fr;
++  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+   gap: 80px;
+   align-items: start;
+ }
+@@ -73,7 +73,11 @@
+ }
+ 
+ .tech-group {
+-  margin-bottom: 36px;
++  margin-bottom: 32px;
++}
++
++.tech-group:last-child {
++  margin-bottom: 0;
+ }
+ 
+ .tech-group-title {
+@@ -100,6 +104,8 @@
+   border-radius: 2px;
+   transition: border-color 0.2s, color 0.2s, background 0.2s;
+   cursor: default;
++  max-width: 100%;
++  overflow-wrap: anywhere;
+ }
+ 
+ .tech-tag:hover {
+@@ -109,6 +115,7 @@
+ }
+ 
+ @media (max-width: 900px) {
+-  .skills-grid { grid-template-columns: 1fr; gap: 48px; }
++  .skills-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+   .skills { padding: 80px 24px; }
++  .skills-heading { margin-bottom: 32px; }
+ }
+diff --git a/src/sections/Skills.jsx b/src/sections/Skills.jsx
+index 7e1d27c..ffea56e 100644
+--- a/src/sections/Skills.jsx
++++ b/src/sections/Skills.jsx
+@@ -4,7 +4,7 @@ import './Skills.css';
+ const techGroups = [
+   {
+     title: 'Languages',
+-    items: ['Python', 'Java', 'C#', 'JavaScript', 'TypeScript', 'HTML', 'CSS', '.NET'],
++    items: ['Python', 'Java', 'C#', 'JavaScript', 'TypeScript', 'Swift', 'HTML', 'CSS', '.NET'],
+   },
+   {
+     title: 'Frontend & 3D',
+@@ -14,9 +14,25 @@ const techGroups = [
+     title: 'Backend & DB',
+     items: ['Node.js', 'Spring Boot', 'REST APIs', 'MongoDB', 'MySQL', 'NoSQL'],
+   },
++  {
++    title: 'Networking & Infrastructure',
++    items: ['Linux', 'TCP/IP', 'VLAN', 'Routing & Firewalls'],
++  },
++  {
++    title: 'IoT & Industrial Protocols',
++    items: ['MQTT', 'Modbus TCP', 'SNMP'],
++  },
++  {
++    title: 'Testing & Diagnostics',
++    items: ['Postman API Testing', 'Wireshark (Network Traffic Analysis)'],
++  },
++  {
++    title: 'Security & Pentesting',
++    items: ['Ethical Hacking', 'Metasploit', 'Aircrack-ng', 'TryHackMe labs'],
++  },
+   {
+     title: 'DevOps & Tools',
+-    items: ['Git', 'Docker', 'Kubernetes', 'Linux', 'Figma', 'Jupyter', 'TensorFlow', 'Pandas'],
++    items: ['Git', 'Docker', 'Kubernetes', 'Figma', 'Jupyter', 'TensorFlow', 'Pandas'],
+   },
+ ];
+ 
+diff --git a/src/styles/globals.css b/src/styles/globals.css
+index 67299bd..5e6fed7 100644
+--- a/src/styles/globals.css
++++ b/src/styles/globals.css
+@@ -27,6 +27,8 @@
+ html {
+   scroll-behavior: smooth;
+   overflow-x: hidden;
++  -webkit-text-size-adjust: 100%;
++  text-size-adjust: 100%;
+ }
+ 
+ body {
+@@ -35,6 +37,18 @@ body {
+   font-family: var(--font-sans);
+   overflow-x: hidden;
+   cursor: none;
++  /* long words / URLs wrap instead of spilling out of their container */
++  overflow-wrap: break-word;
++  word-wrap: break-word;
++}
++
++img, svg, video, canvas {
++  max-width: 100%;
++}
++
++/* grid / flex children may shrink below their content width */
++section > *, .about-grid > *, .skills-grid > *, .contact-grid > * {
++  min-width: 0;
+ }
+ 
+ a {

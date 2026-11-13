@@ -23,6 +23,14 @@ const projects = [
 
 const experience = [
   {
+    period: 'Aug 2026 — Oct 2026',
+    company: 'Teltonika Networks',
+    role: 'QA IoT Engineer Intern',
+    desc: 'Completed internship at the Teltonika laboratory, focusing on hardware-level testing and network diagnostics of industrial IoT devices. Administered Linux environments and configured complex network infrastructures including routing, VLANs and firewalls (OSI/TCP-IP models). Conducted API testing using Postman and validated industrial communication protocols to ensure robust network stability and security.',
+    tags: ['Linux', 'TCP/IP', 'VLAN', 'Routing', 'Firewalls', 'Postman', 'Industrial Protocols'],
+    certificate: '/teltonika-certificate.pdf',
+  },
+  {
     period: 'Dec 2025',
     company: 'JP Morgan Chase & Co',
     role: 'Software Engineering Intern',
@@ -90,7 +98,7 @@ export default function Projects() {
           <h3 className="mono exp-title">// experience</h3>
           <div className="exp-list">
             {experience.map(e => (
-              <div key={e.company} className="exp-item">
+              <div key={`${e.company}-${e.period}`} className="exp-item">
                 <div className="exp-left">
                   <span className="mono exp-period">{e.period}</span>
                 </div>
@@ -98,8 +106,26 @@ export default function Projects() {
                   <div className="exp-header">
                     <span className="exp-company">{e.company}</span>
                     <span className="mono exp-role">{e.role}</span>
+                    {e.certificate && (
+                      <a
+                        href={e.certificate}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="exp-cert"
+                        data-hover
+                      >
+                        View Certificate ↗
+                      </a>
+                    )}
                   </div>
                   <p className="exp-desc">{e.desc}</p>
+                  {e.tags && (
+                    <div className="exp-tags">
+                      {e.tags.map(t => (
+                        <span key={t} className="project-tag mono">{t}</span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
